@@ -1,112 +1,100 @@
 PROJECT CONTENTS
 ================
-- prompt_acv1p0.ipynd: Jupyter file
+- prompt_III_AC_v1p1.ipynd: Jupyter file
 - readme.md (this file): Project content description
 
 GENERAL DESCRIPTION
 ===================
-This project pertains a marketing effort to supply customers with promotional discount coupons to several types of commercial establishments.
-The coupons are delivered wirelessly via phone to vehicle drivers. The goal is to gain insights into coupon acceptance patterns for several customer groups
-based on data variables and associated attributes.
-The project uses data contained in UC Irvine's Machine Learning reporsitory located at https://archive.ics.uci.edu/dataset/603/in+vehicle+coupon+recommendation
+This project pertains to a marketing effort to encourage existing and new customers to open deposit accounts at a banking institution.
+Customers are contacted through different methods (cellular, telephone calls) to promote deposit account offerings. 
+The goal of the project is to develop quantitative models using AI/ML techniques that can be used to predict which customers will susbcribe new deposits at the bank. 
+The project uses data contained in UC Irvine's Machine Learning reporsitory located at https://archive.ics.uci.edu/dataset/222/bank+marketing
+The dataset reflects data collected for 17 marketing campaigns that took place between May 2008 and November 2010.
 
 DETAILED DESCRIPTION
 ====================
-We use information from thw UC Irvine repository to include descriptions of the data variables. Please go to the link above for a deeper discussion on data contents. 
-"destination: No Urgent Place, Home, Work
-passanger: Alone, Friend(s), Kid(s), Partner (who are the passengers in the car)
-weather: Sunny, Rainy, Snowy
-temperature:55, 80, 30
-time: 2PM, 10AM, 6PM, 7AM, 10PM
-coupon: Restaurant(<$20), Coffee House, Carry out & Take away, Bar, Restaurant($20-$50)
-expiration: 1d, 2h (the coupon expires in 1 day or in 2 hours)
-gender: Female, Male
-age: 21, 46, 26, 31, 41, 50plus, 36, below21
-maritalStatus: Unmarried partner, Single, Married partner, Divorced, Widowed
-has_Children:1, 0
-education: Some college - no degree, Bachelors degree, Associates degree, High School Graduate, Graduate degree (Masters or Doctorate), Some High School
-occupation: Unemployed, Architecture & Engineering, Student, 
-Education&Training&Library, Healthcare Support, 
-Healthcare Practitioners & Technical, Sales & Related, Management, 
-Arts Design Entertainment Sports & Media, Computer & Mathematical, 
-Life Physical Social Science, Personal Care & Service, 
-Community & Social Services, Office & Administrative Support, 
-Construction & Extraction, Legal, Retired, 
-Installation Maintenance & Repair, Transportation & Material Moving, 
-Business & Financial, Protective Service, 
-Food Preparation & Serving Related, Production Occupations, 
-Building & Grounds Cleaning & Maintenance, Farming Fishing & Forestry
-income: $37500 - $49999, $62500 - $74999, $12500 - $24999, $75000 - $87499, 
-$50000 - $62499, $25000 - $37499, $100000 or More, $87500 - $99999, Less than $12500
-Bar: never, less1, 1~3, gt8,  nan4~8 (feature meaning: how many times do you go to a bar every month?)
-CoffeeHouse: never, less1, 4~8, 1~3, gt8,  nan (feature meaning: how many times do you go to a coffeehouse every month?)
-CarryAway:n4~8, 1~3, gt8, less1, never (feature meaning: how many times do you get take-away food every month?)
-RestaurantLessThan20: 4~8, 1~3, less1, gt8,  never (feature meaning: how many times do you go to a restaurant with an average expense per person of less than $20 every month?)
-Restaurant20To50: 1~3, less1, never, gt8, 4~8,  nan (feature meaning: how many times do you go to a restaurant with average expense per person of $20 - $50 every month?)
-toCoupon_GEQ15min:0,1 (feature meaning: driving distance to the restaurant/bar for using the coupon is greater than 15 minutes)
-toCoupon_GEQ25min:0, 1 (feature meaning: driving distance to the restaurant/bar for using the coupon is greater than 25 minutes)
-direction_same:0, 1 (feature meaning: whether the restaurant/bar is in the same direction as your current destination)
-direction_opp:1, 0 (feature meaning: whether the restaurant/bar is in the same direction as your current destination)
-Y:1, 0 (whether the coupon is accepted)"
+This dataset is publicly available for research. The details are described in [Moro et al., 2014]. 
+  [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, In press, http://dx.doi.org/10.1016/j.dss.2014.03.001
+
+  Available at: [pdf] http://dx.doi.org/10.1016/j.dss.2014.03.001
+                [bib] http://www3.dsi.uminho.pt/pcortez/bib/2014-dss.txt
+
+Input variables:
+   Bank client data:
+   1 - age (numeric)
+   2 - job : type of job (categorical: "admin.","blue-collar","entrepreneur","housemaid","management","retired","self-employed","services","student","technician","unemployed","unknown")
+   3 - marital : marital status (categorical: "divorced","married","single","unknown"; note: "divorced" means divorced or widowed)
+   4 - education (categorical: "basic.4y","basic.6y","basic.9y","high.school","illiterate","professional.course","university.degree","unknown")
+   5 - default: has credit in default? (categorical: "no","yes","unknown")
+   6 - housing: has housing loan? (categorical: "no","yes","unknown")
+   7 - loan: has personal loan? (categorical: "no","yes","unknown")
+
+   
+   related with the last contact of the current campaign:
+   
+   8 - contact: contact communication type (categorical: "cellular","telephone") 
+   9 - month: last contact month of year (categorical: "jan", "feb", "mar", ..., "nov", "dec")
+  10 - day_of_week: last contact day of the week (categorical: "mon","tue","wed","thu","fri")
+  11 - duration: last contact duration, in seconds (numeric). Important note:  this attribute highly affects the output target (e.g., if duration=0 then y="no"). Yet, the duration is not known before a call is performed. 
+  Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.
+
+  
+  other attributes:
+  
+  12 - campaign: number of contacts performed during this campaign and for this client (numeric, includes last contact)
+  13 - pdays: number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously contacted)
+  14 - previous: number of contacts performed before this campaign and for this client (numeric)
+  15 - poutcome: outcome of the previous marketing campaign (categorical: "failure","nonexistent","success")
+  
+  social and economic context attributes
+  16 - emp.var.rate: employment variation rate - quarterly indicator (numeric)
+  17 - cons.price.idx: consumer price index - monthly indicator (numeric)     
+  18 - cons.conf.idx: consumer confidence index - monthly indicator (numeric)     
+  19 - euribor3m: euribor 3 month rate - daily indicator (numeric)
+  20 - nr.employed: number of employees - quarterly indicator (numeric)
+
+
+  Output variable (desired target):
+  21 - y - has the client subscribed a term deposit? (binary: "yes","no")
 
 ANALYSIS SCOPE
 ==============
-The attached Jupyter notebook contains a detailed analysis of two types of coupons:
-1) Bar coupons
-2) CoffeHouse coupons
+The attached Jupyter notebook contains a detailed analysis of the data using several well-know data classification methods:
+1) Decision Tree (DTree)
+2) Logistic Regression (LR)
+3) K-Mearest Neighbor (KNN)
+4) Support Vector Machine (SVM)
 
-The influence of several data variables and attributes on coupon acceptance rates was examined.
-Accompanying visaulizations were generated to support the initial conclusions of our analyses and are included in the notebook.
+The performance of these classifiers was evaluated on the basis of the following metrics:
+1) Accuracy 
+2) Precision
+3) Recall
+4) F1 score
+5) Training time
+   
+Additional assesment tools and visualizations were employed to determine classification method performance:
+1) Classification Report
+2) Confusion Matrix
+
 
 SUMMARY OF MAIN ACTIONS AND FINDINGS
 ====================================
-- Data was explored for inconsistencies and missing values. Appropriate data cleaning actions were taken
-- Found that the proportion of the total observations that chose to accept the coupon was 57.06 percent
-- Coupon data for "Bar" and "CoffeeHouse" stores were analyzed
-- Findings for Bar coupons
-    - The proportion of bar coupons that were accepted was  41.19 percent
-    - The acceptance rate for individuals who went to a bar 3 or fewer times a month was 33.86 percent
-    - The acceptance rate for individuals who went to a bar more than 3 times a month was 76.29 percent
-    - The acceptance rate for individuals who went to a bar more than once a month and who were over the age of 25 was 68.54 percent
-    - The acceptance rate for all other individuals was 39.45 percent
-    - The acceptance rate for individuals who went to a bar more than once a month was 68.54 percent
-    - The acceptance rate for individuals who had passengers that were not a kid was 43.51 percent
-    - The acceptance rate for individuals who had passengers that had occupations other than farming, fishing, or forestry was 41.18 percent
-    - The acceptance rate for individuals who went to a bar more than once a month and had passengers that were not a kid was 70.96 percent
-    - The acceptance rate for individuals who went to a bar more than once a month and had passengers that were not a kid and had occupations other than farming, fishing, or forestry was 70.96 percent
-    - The acceptance rate for individuals who are under the age of 30 was 49.09 percent
-    - The acceptance rate for individuals who went to a bar more than once a month and are under the age of 30 was 71.76 percent
-    - We hypothesized that the group that accepts bar coupons the most is under 30 years and goes to bars more than once a month. This seems to be supported by the analyses and visualizations.
-- Findings for Coffee House coupons
-    - The proportion of coffee house coupons that were accepted was  50.04 percent
-    - The acceptance rate for individuals who went to a Coffee House 3 or fewer times a month was 43.12 percent
-    - The acceptance rate for individuals who went to a Coffee House more than once a month was 50.04 percent
-    - The acceptance rate for individuals who went to a Coffee House more than 3 times a month was 67.50 percent
-    - The acceptance rate for individuals who went to a CoffeeHouse more than 3 times a month was 67.50 percent.
-    - The acceptance rate for individuals who went to a CoffeeHouse more than 3 times a month and are below the age of 25 was 74.90 percent
-    - The acceptance rate for individuals who went to a CoffeeHouse more than 3 times a month and are age 26 and older was 67.50 percent
-    - The acceptance rate for individuals who went to a CoffeeHouse more than 3 times a month and are age below 25 and 50plus was 72.71 percent
-    - The acceptance rate for individuals who went to a CoffeeHouse more than 3 times a month and are below the age of 25 and male was 73.51 percent
-    - The acceptance rate for individuals who went to a CoffeeHouse more than 3 times a month and are below the age of 25 and female was 76.79 percent
-    - For the group who went to a CoffeeHouse more than 3 times a month and are below the age of 25:
-        - The subgroups with the largest acceptance rates were individuals with incomes less than 12500, between 87500-99999 and between 62500-74999 dollars.
-            - The largest number of coupons accepted were by the less than 12500 dollar income group
-        - There were not significant (<10%) changes in acceptance rates when data was segmented by the individuals' educational level
-        - Coupon acceptance rates are low late at night (10 PM) and peak at 10 AM and 2 PM. The largest number of coupons accepted was in the 21 year old group.
-        - Coupon acceptance rates are influenced by the direction of driving. Acceptance rates are sginificantly higher when the individuals are driving in the direction of the coffee house
-        - Coupons acceptance rates are higher when the driver is physically close to the coffee house.
-            - Acceptance rate peaks when the driver is within 15 minutes of the store at the time the coupon is received
-    - Based on the partial analyses performed, the customer who is the most likely to accept bar coupons has the following profile:
-      - Visits coffee houses more than 3 times a month
-      - It is under 25 years old
-      - Female
-      - Has an income less than $12500
-      - The coupon is issued between the mid morning and the early afternoon (10AM to 2PM)
-      - It is driving in the same direction as the coffee house is located
-      - It is within 15 minutes of the store   
+- Data was explored for inconsistencies and missing values
+- Feature engineering was conducted to select the best features to use for modeling
+- Categorical features were hot-encoded
+- Target variable clasess were binary encoded
+- Numeric features were standardized
+- Main findings
+    - Decision Tree and SVM classifiers performed the best when models were optimized for accuracy or precision
+    - Overall, it can be argued that SVM was the best performer for the conditions tested
+    - The main drawback in using SVM was the long computation time compared to the other methods evaluated (KNN, LR, Decision Tree)
+    - The performance of the models was affected by a significant class imbalance in the target variable (88.7% on target entries were 0 ('no') and 11.3% were 1 ('yes')) 
+    - Data splitting stratification was partially successful in mitigating the biasing effects of target variable class imbalance
+    - 
 
-  NEXT STEPS AND RECOMMENDATIONS
-  ==============================
-  We have completed an initial analysis of two coupon types with a limited set of variables and data attributes.
-  It would be good to expand the analysis to explore the possible influences of occupation, passanger type, marital status, family composition and weather among others.
-  Also expand the analysis to look at other type of store coupons as well. 
+NEXT STEPS AND RECOMMENDATIONS
+==============================
+We have shown how the CRISP-DM framework can be used for the analysis of a marketing application using AI/ML methods. We illustrated how different quantitative classification methods can perform when 
+predicting customer behavior (whether customer chooses to subscribe to offered deposit or not). The methods analyzed can be instrumental in ensuring the success of marketing campaigns with similar binary classification goals.
+Simple stratification could not completely reduce the effects of severe class imbalance in the target variable. Focused intent sampling is required to mitigate this imbalance. 
+We will explore this technique in a future revision of this work.
