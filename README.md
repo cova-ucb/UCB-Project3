@@ -90,7 +90,6 @@ SUMMARY OF MAIN ACTIONS AND FINDINGS
     - The main drawback in using SVM was the long computation time compared to the other methods evaluated (KNN, LR, Decision Tree)
     - The performance of the models was affected by a significant class imbalance in the target variable (88.7% on target entries were 0 ('no') and 11.3% were 1 ('yes')) 
     - Data splitting stratification was partially successful in mitigating the biasing effects of target variable class imbalance
-    - 
 
 NEXT STEPS AND RECOMMENDATIONS
 ==============================
